@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoldBurn V4 Sandbox</title>
+    <title>GoldBurn V3 Sandbox</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
@@ -23,13 +23,13 @@
         import ReactDOM from 'https://esm.sh/react-dom@18.2.0/client';
 
         // ============================================================================
-        // V4 CARD DATABASE
+        // V3 CARD DATABASE
         // ============================================================================
         
         // XXXX HOW TO ADD CARDS AND PICTURES XXXX
         // 1. To add a new card, create a new object in this MASTER_CARDS list.
         // 2. Make sure you define 'limit'. Default non-vitals to 3. Vital should be 1.
-        // 3. To add a picture, use the 'image' property with the file name or direct URL link.a
+        // 3. To add a picture, use the 'image' property with the file name or direct URL link.
 
         const MASTER_CARDS = [
             { id: 'heart_soul', name: 'Heart and Soul', type: 'Vital', limit: 1, hp: 20, cost: 0, set: 'Core', image: 'Heart&Soul.png', description: 'Can make up to three actions per turn. Unaffected by move effects.' },
@@ -101,7 +101,7 @@
 
         const GameProvider = ({ children }) => {
             const [customDeck, setCustomDeck] = useState(() => {
-                const stored = localStorage.getItem('v4_saved_deck');
+                const stored = localStorage.getItem('v3_saved_deck');
                 if (stored) {
                     const parsed = JSON.parse(stored);
                     const cleaned = {};
@@ -122,7 +122,7 @@
 
                     const next = { ...prev, [id]: nextQty };
                     if (next[id] === 0) delete next[id];
-                    localStorage.setItem('v4_saved_deck', JSON.stringify(next));
+                    localStorage.setItem('v3_saved_deck', JSON.stringify(next));
                     return next;
                 });
             };
@@ -138,7 +138,7 @@
                     }
                 }
                 setCustomDeck(cleaned);
-                localStorage.setItem('v4_saved_deck', JSON.stringify(cleaned));
+                localStorage.setItem('v3_saved_deck', JSON.stringify(cleaned));
             };
 
             return (
@@ -159,6 +159,7 @@
             const [typeFilter, setTypeFilter] = useState('All');
             const [setFilter, setSetFilter] = useState('All');
             const [sortOrder, setSortOrder] = useState('A-Z');
+            const [zoomedCard, setZoomedCard] = useState(null);
 
             // Utilities State
             const [selectedStarter, setSelectedStarter] = useState(Object.keys(STARTER_DECKS)[0]);
@@ -233,7 +234,7 @@
                     <div className="xl:col-span-8 bg-stone-900 border border-amber-900/30 rounded-2xl p-5 shadow-2xl flex flex-col h-[750px]">
                         
                         <div className="border-b border-stone-800 pb-4 mb-4">
-                            <h2 className="text-lg font-bold text-amber-500 uppercase tracking-wide mb-3">V4 Deck Builder</h2>
+                            <h2 className="text-lg font-bold text-amber-500 uppercase tracking-wide mb-3">V3 Deck Builder</h2>
                             
                             <div className="grid grid-cols-1 md:grid-cols-6 gap-3">
                                 <input 
@@ -284,7 +285,12 @@
                                         <div className="shrink-0">
                                             <div className="flex justify-between items-start gap-2">
                                                 <h4 className="font-bold text-stone-200 text-sm truncate">{card.name}</h4>
-                                                <span className="text-[10px] font-mono text-amber-500">{card.cost}G</span>
+                                                <div className="flex items-center gap-2">
+                                                    <button onClick={() => setZoomedCard(card)} className="text-stone-400 hover:text-amber-400 transition transform hover:scale-110" title="View Full Card">
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                                    </button>
+                                                    <span className="text-[10px] font-mono text-amber-500">{card.cost}G</span>
+                                                </div>
                                             </div>
                                             <div className="flex justify-between items-center mt-1 pb-2 border-b border-stone-900">
                                                 <span className="text-[9px] uppercase text-stone-500">{card.type} • {card.set}</span>
@@ -401,12 +407,29 @@
                             </div>
                         </div>
                     </div>
+
+                    {/* ZOOM MODAL */}
+                    {zoomedCard && (
+                        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setZoomedCard(null)}>
+                            <div className="w-[300px] h-[420px] sm:w-[400px] sm:h-[560px] relative rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-700" onClick={e => e.stopPropagation()}>
+                                {zoomedCard.image ? (
+                                     <img src={zoomedCard.image} alt={zoomedCard.name} className="w-full h-full object-cover" />
+                                ) : (
+                                     <div className="flex flex-col items-center justify-center h-full bg-stone-800 text-stone-200 p-6 text-center border-4 border-stone-900">
+                                         <h2 className="text-3xl font-bold mb-4 text-amber-500">{zoomedCard.name}</h2>
+                                         <p className="text-stone-400 italic text-sm">{zoomedCard.description}</p>
+                                     </div>
+                                )}
+                                <button onClick={() => setZoomedCard(null)} className="absolute top-3 right-3 bg-stone-900/80 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-rose-600 border border-stone-700 transition">X</button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         };
 
         // ============================================================================
-        // V4 MULTIPLAYER LOBBY
+        // V3 MULTIPLAYER LOBBY
         // ============================================================================
         const Lobby = ({ onJoin }) => {
             const [username, setUsername] = useState('');
@@ -414,7 +437,7 @@
 
             return (
                 <div className="max-w-md mx-auto mt-20 bg-stone-900 border border-amber-900/30 rounded-2xl p-6 shadow-2xl text-center">
-                    <h1 className="text-2xl font-black text-amber-500 uppercase tracking-widest mb-1">V4 Engine</h1>
+                    <h1 className="text-2xl font-black text-amber-500 uppercase tracking-widest mb-1">V3 Engine</h1>
                     <p className="text-xs text-stone-400 mb-6">Peer-to-Peer Sandbox Mode</p>
                     
                     <div className="space-y-4 text-left">
@@ -435,7 +458,7 @@
         };
 
         // ============================================================================
-        // V4 SANDBOX BOARD
+        // V3 SANDBOX BOARD
         // ============================================================================
         const SandboxBoard = ({ roomCode, username, isHost, customDeck, onLeaveLobby }) => {
             const [peer, setPeer] = useState(null);
@@ -468,6 +491,7 @@
             const [logs, setLogs] = useState([]);
             
             const [selectedHandIdx, setSelectedHandIdx] = useState(null);
+            const [inspectedCard, setInspectedCard] = useState(null);
             const [viewModal, setViewModal] = useState({ isOpen: false, title: '', cards: [], onSelect: null });
             const [activeMenu, setActiveMenu] = useState(null);
 
@@ -490,14 +514,14 @@
                 const startingHand = generatedDeck.splice(0, 5);
                 setDeck(generatedDeck);
                 setHand(startingHand);
-                addLog(`Game Engine V4 Initialized. ${isHost ? 'You go first (3 Gold).' : 'You go second (0 Gold).'}`);
+                addLog(`Game Engine V3 Initialized. ${isHost ? 'You go first (3 Gold).' : 'You go second (0 Gold).'}`);
             }, []);
 
             useEffect(() => {
-                const p = new Peer(isHost ? `v4-${roomCode}` : null);
+                const p = new Peer(isHost ? `v3-${roomCode}` : null);
                 p.on('open', id => {
                     if (!isHost) {
-                        const c = p.connect(`v4-${roomCode}`);
+                        const c = p.connect(`v3-${roomCode}`);
                         setupConnection(c);
                     }
                 });
@@ -631,6 +655,7 @@
                 
                 setHand(newHand);
                 setSelectedHandIdx(null);
+                setInspectedCard(null);
                 broadcastGrid(newGrid);
                 addLog(`${username} deployed ${card.name} to an Empty Space.`, true);
             };
@@ -643,6 +668,7 @@
                 newHand.splice(selectedHandIdx, 1);
                 setHand(newHand);
                 setSelectedHandIdx(null);
+                setInspectedCard(null);
                 broadcastZone(card);
                 addLog(`${username} established a new Zone: ${card.name}.`, true);
             };
@@ -655,6 +681,7 @@
                 newHand.splice(selectedHandIdx, 1);
                 setHand(newHand);
                 setSelectedHandIdx(null);
+                setInspectedCard(null);
                 broadcastAct(card);
                 addLog(`${username} played ${card.type}: ${card.name}.`, true);
             };
@@ -698,6 +725,7 @@
                 newHand.splice(idx, 1);
                 setHand(newHand);
                 setSelectedHandIdx(null);
+                setInspectedCard(null);
 
                 if (dest === 'grave') {
                     setGrave([card, ...grave]);
@@ -710,24 +738,33 @@
 
             const renderCard = (card, onClick, showMenuParams) => {
                 if (!card) return (
-                    <div onClick={onClick} className="w-full h-full border-2 border-stone-800 border-dashed rounded-lg flex items-center justify-center bg-stone-900/40 hover:bg-stone-800 cursor-pointer transition">
+                    <div onClick={(e) => { setInspectedCard(null); if(onClick) onClick(e); }} className="w-full h-full border-2 border-stone-800 border-dashed rounded-lg flex items-center justify-center bg-stone-900/40 hover:bg-stone-800 cursor-pointer transition-all hover:scale-105">
                         <span className="text-[10px] font-mono text-stone-600 uppercase text-center px-2">Empty Space</span>
                     </div>
                 );
 
                 return (
-                    <div onClick={() => setActiveMenu(activeMenu ? null : showMenuParams)} className="relative w-full h-full border-2 border-stone-800 rounded-lg bg-stone-850 shadow-md hover:border-amber-600 transition cursor-pointer flex flex-col group overflow-hidden">
+                    <div 
+                        onClick={(e) => { 
+                            setInspectedCard(card);
+                            if (onClick) onClick(e);
+                            if (showMenuParams) setActiveMenu(activeMenu ? null : showMenuParams);
+                        }} 
+                        className="relative w-full h-full border-2 border-stone-800 rounded-lg bg-stone-850 shadow-md hover:border-amber-600 cursor-pointer flex flex-col group overflow-hidden transition-all hover:scale-105"
+                    >
                         {card.image && (
-                            <img src={card.image} alt={card.name} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition" />
+                            <img src={card.image} alt={card.name} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition" />
                         )}
-                        <div className="absolute top-0 w-full bg-stone-950/90 p-1 flex justify-between items-center border-b border-stone-800 z-10">
-                            <span className="text-[9px] font-bold text-stone-200 truncate pr-1">{card.name}</span>
-                            <span className="text-[9px] text-amber-500 font-mono bg-stone-900 px-1 rounded">{card.cost}G</span>
-                        </div>
-                        <span className="absolute top-6 left-1 text-[8px] uppercase bg-stone-900/90 px-1 rounded text-stone-400 z-10">{card.type}</span>
                         
+                        {/* Fallback Text only if no image exists (Clean board layout) */}
+                        {!card.image && (
+                            <div className="absolute inset-0 p-2 flex flex-col items-center justify-center bg-stone-900">
+                                <span className="text-[9px] font-bold text-stone-200 text-center">{card.name}</span>
+                            </div>
+                        )}
+
                         {card.hp !== undefined && (
-                            <div className="absolute bottom-1 left-1 bg-stone-200 text-stone-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-xs border-2 border-stone-900 shadow-lg z-10">
+                            <div className="absolute bottom-1 right-1 bg-stone-200 text-stone-900 rounded-full w-8 h-8 flex items-center justify-center font-bold text-xs border-2 border-stone-900 shadow-lg z-10">
                                 {card.currentHp}
                             </div>
                         )}
@@ -779,29 +816,27 @@
                                  <span className="text-emerald-400">Waiting for opponent to lock in their Vital...</span>}
                             </p>
                             
-                            <div className="grid grid-rows-2 gap-3 max-w-md mx-auto mb-8 bg-stone-950/50 p-4 rounded-xl border border-stone-800">
+                            <div className="max-w-md mx-auto mb-8 bg-stone-950/50 p-4 rounded-xl border border-stone-800">
                                 {[0, 1].map(r => (
-                                    <div key={`setup-row-${r}`} className="grid grid-cols-3 gap-3 h-28">
+                                    <div key={`setup-row-${r}`} className="flex gap-2 justify-center mb-2 last:mb-0">
                                         {[0,1,2].map(c => {
                                             const isSelected = myVitalPos?.r === r && myVitalPos?.c === c;
                                             return (
                                                 <div 
                                                     key={`setup-${r}-${c}`} 
                                                     onClick={() => !myVitalLocked && connected && setMyVitalPos({r, c})}
-                                                    className={`border-2 rounded-lg transition flex flex-col items-center justify-center relative overflow-hidden
+                                                    className={`w-[100px] h-[140px] border-2 rounded-lg transition-all flex flex-col items-center justify-center relative overflow-hidden
                                                         ${!connected ? 'border-stone-900 bg-stone-950 cursor-not-allowed' : 
                                                           isSelected ? 'border-amber-500 bg-amber-950/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]' : 
-                                                          'border-stone-800 bg-stone-950 hover:border-stone-600 cursor-pointer'}`}
+                                                          'border-stone-800 border-dashed bg-stone-950 hover:border-stone-600 hover:scale-105 cursor-pointer'}`}
                                                 >
                                                     {isSelected && vitalCardInst ? (
                                                         <>
-                                                            {vitalCardInst.image && <img src={vitalCardInst.image} className="absolute inset-0 w-full h-full object-cover opacity-50" />}
-                                                            <div className="relative text-[10px] font-bold text-amber-400 text-center px-1 z-10 bg-stone-950/80 rounded p-1">
-                                                                {vitalCardInst.name}<br/>(Targeted)
-                                                            </div>
+                                                            {vitalCardInst.image && <img src={vitalCardInst.image} className="absolute inset-0 w-full h-full object-cover opacity-80" />}
+                                                            <div className="absolute inset-0 ring-4 ring-amber-500 ring-inset rounded-lg pointer-events-none z-20"></div>
                                                         </>
                                                     ) : (
-                                                        <span className="text-[10px] font-mono text-stone-700">Empty Space [{r},{c}]</span>
+                                                        <span className="text-[10px] font-mono text-stone-700 text-center px-2 uppercase">Empty Space<br/>[{r},{c}]</span>
                                                     )}
                                                 </div>
                                             )
@@ -830,8 +865,32 @@
             return (
                 <div className="h-screen flex flex-col lg:flex-row p-4 gap-4 max-w-[1600px] mx-auto">
                     
-                    {/* LEFT PANEL: Logs & Trackers */}
+                    {/* LEFT PANEL: Logs & Trackers & Card Inspector */}
                     <div className="lg:w-64 flex flex-col gap-4">
+                        
+                        {/* Card Inspector Tool */}
+                        <div className="bg-stone-900 border border-stone-800 rounded-xl p-4 shadow-md flex flex-col items-center shrink-0">
+                            <span className="text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-800 w-full text-center pb-2 mb-3">Card Inspector</span>
+                            {inspectedCard ? (
+                                <div className="w-[150px] h-[210px] relative rounded-lg overflow-hidden shadow-xl border-2 border-amber-600">
+                                    {inspectedCard.image ? (
+                                        <img src={inspectedCard.image} alt={inspectedCard.name} className="absolute inset-0 w-full h-full object-cover" />
+                                    ) : (
+                                        <div className="absolute inset-0 bg-stone-800 flex flex-col p-2 text-center items-center justify-center">
+                                            <span className="text-xs font-bold text-stone-200 mb-1">{inspectedCard.name}</span>
+                                            <span className="text-[9px] text-amber-500">{inspectedCard.cost}G</span>
+                                            <span className="text-[9px] text-stone-500 mt-2">{inspectedCard.type}</span>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="w-[150px] h-[210px] border-2 border-dashed border-stone-700 rounded-lg flex items-center justify-center p-4 bg-stone-900/50">
+                                    <span className="text-[10px] font-mono text-stone-600 uppercase text-center">Click card<br/>to inspect</span>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Tracker UI */}
                         <div className="bg-stone-900 border border-stone-800 rounded-xl p-4 shadow-md">
                             <div className="flex justify-between items-center mb-1">
                                 <h2 className="text-xs font-black text-amber-500 uppercase tracking-widest">Room: {roomCode}</h2>
@@ -890,12 +949,12 @@
                         <div className="flex-1 bg-stone-900 border border-stone-800 rounded-xl p-6 flex flex-col justify-between relative shadow-inner">
                             
                             <div className="w-full max-w-xl mx-auto">
-                                <span className="text-[10px] font-mono text-rose-500 font-bold uppercase tracking-widest mb-1 block">Enemy Space</span>
-                                <div className="grid grid-rows-2 gap-2">
+                                <span className="text-[10px] font-mono text-rose-500 font-bold uppercase tracking-widest mb-1 block text-center">Enemy Space</span>
+                                <div className="flex flex-col gap-2">
                                     {[1, 0].map(r => (
-                                        <div key={`opp-row-${r}`} className="grid grid-cols-3 gap-2 h-28">
+                                        <div key={`opp-row-${r}`} className="flex justify-center gap-2">
                                             {[0,1,2].map(c => (
-                                                <div key={`opp-${r}-${c}`} className="opacity-70 pointer-events-none">
+                                                <div key={`opp-${r}-${c}`} className="w-[100px] h-[140px] opacity-70 pointer-events-none">
                                                     {renderCard(oppGrid[r][c])}
                                                 </div>
                                             ))}
@@ -905,32 +964,32 @@
                             </div>
 
                             <div className="w-full max-w-3xl mx-auto flex items-center justify-between border-y border-stone-800/60 py-3 my-2 bg-stone-950/30 rounded-xl px-4">
-                                <div className="w-20 h-24 border border-stone-800 rounded bg-stone-900 flex-shrink-0 flex items-center justify-center relative opacity-70 pointer-events-none">
+                                <div className="w-[100px] h-[140px] border-2 border-stone-800 border-dashed rounded-lg bg-stone-900/40 flex-shrink-0 flex items-center justify-center relative opacity-70 pointer-events-none">
                                     <span className="absolute -top-3 text-[8px] text-rose-500 uppercase font-mono">Enemy Act</span>
-                                    {oppActSlot ? <div className="text-[9px] text-center p-1 text-stone-300">{oppActSlot.name}</div> : <span className="text-[8px] text-stone-700 font-mono">Empty</span>}
+                                    {oppActSlot ? <div className="text-[9px] text-center p-1 text-stone-300">{oppActSlot.name}</div> : <span className="text-[8px] text-stone-700 font-mono uppercase">Empty</span>}
                                 </div>
                                 
                                 <div className="flex flex-col items-center">
                                     <span className="text-[10px] font-mono text-amber-500 uppercase tracking-widest mb-1">Zone in Play</span>
-                                    <div className="w-28 h-32 flex-shrink-0 relative">
+                                    <div className="w-[100px] h-[140px] flex-shrink-0 relative">
                                         {renderCard(sharedZone, placeToZone, { type: 'zone', id: 'shared-zone' })}
                                     </div>
                                     <span className="text-[8px] text-stone-600 mt-1 italic">Affects both fields</span>
                                 </div>
 
-                                <div className="w-20 h-24 flex-shrink-0 relative">
+                                <div className="w-[100px] h-[140px] flex-shrink-0 relative">
                                     <span className="absolute -top-3 text-[8px] text-amber-500 uppercase font-mono">Your Act Slot</span>
                                     {renderCard(actSlot, placeToAct, { type: 'act', id: 'my-act' })}
                                 </div>
                             </div>
 
                             <div className="w-full max-w-xl mx-auto">
-                                <span className="text-[10px] font-mono text-amber-500 font-bold uppercase tracking-widest mb-1 block">Empty Space (Your Grid)</span>
-                                <div className="grid grid-rows-2 gap-2">
+                                <span className="text-[10px] font-mono text-amber-500 font-bold uppercase tracking-widest mb-1 block text-center">Empty Space (Your Grid)</span>
+                                <div className="flex flex-col gap-2">
                                     {[0, 1].map(r => (
-                                        <div key={`my-row-${r}`} className="grid grid-cols-3 gap-2 h-28">
+                                        <div key={`my-row-${r}`} className="flex justify-center gap-2">
                                             {[0,1,2].map(c => (
-                                                <div key={`my-${r}-${c}`}>
+                                                <div key={`my-${r}-${c}`} className="w-[100px] h-[140px]">
                                                     {renderCard(myGrid[r][c], () => placeToGrid(r, c), { type: 'grid', r, c, id: `my-${r}-${c}` })}
                                                 </div>
                                             ))}
@@ -942,7 +1001,7 @@
                         </div>
 
                         {/* Hand & Piles */}
-                        <div className="bg-stone-900 border border-stone-800 rounded-xl p-4 flex gap-4 h-48">
+                        <div className="bg-stone-900 border border-stone-800 rounded-xl p-4 flex gap-4 min-h-[180px]">
                             <div className="flex flex-col gap-2 w-28 border-r border-stone-800 pr-4">
                                 <button onClick={drawFromDeck} className="flex-1 bg-stone-950 border border-stone-800 hover:border-amber-600 rounded text-xs font-bold text-stone-300 transition flex flex-col items-center justify-center">
                                     <span>Draw</span>
@@ -961,20 +1020,24 @@
                                 </div>
                             </div>
 
-                            <div className="flex-1 overflow-x-auto">
+                            <div className="flex-1 overflow-x-auto pb-2">
                                 <span className="text-[10px] font-mono text-stone-500 uppercase block mb-1">Your Hand</span>
                                 <div className="flex gap-2">
                                     {hand.map((card, idx) => (
-                                        <div key={card.instanceId} onClick={()=>setSelectedHandIdx(selectedHandIdx===idx ? null : idx)} className={`w-24 h-32 flex-shrink-0 transition-transform cursor-pointer relative ${selectedHandIdx === idx ? '-translate-y-2 ring-2 ring-amber-500 rounded-lg' : ''}`}>
+                                        <div key={card.instanceId} 
+                                             onClick={() => { setSelectedHandIdx(selectedHandIdx === idx ? null : idx); setInspectedCard(card); }} 
+                                             className={`w-[100px] h-[140px] flex-shrink-0 transition-transform cursor-pointer relative hover:scale-105 ${selectedHandIdx === idx ? '-translate-y-2 ring-2 ring-amber-500 rounded-lg' : ''}`}>
                                             <div className="w-full h-full border-2 border-stone-800 rounded-lg bg-stone-850 flex flex-col justify-between overflow-hidden relative">
                                                 {card.image && (
-                                                    <img src={card.image} alt={card.name} className="absolute inset-0 w-full h-full object-cover opacity-60" />
+                                                    <img src={card.image} alt={card.name} className="absolute inset-0 w-full h-full object-cover opacity-80" />
                                                 )}
-                                                <div className="relative flex justify-between items-center bg-stone-950/90 p-1 border-b border-stone-800 z-10">
-                                                    <span className="text-[8px] font-bold text-stone-200 truncate">{card.name}</span>
-                                                    <span className="text-[8px] text-amber-500 font-mono bg-stone-900 px-1 rounded">{card.cost}G</span>
-                                                </div>
-                                                <span className="relative text-[7px] uppercase text-stone-400 bg-stone-900/90 w-max px-1 ml-1 rounded z-10">{card.type}</span>
+                                                
+                                                {/* Fallback layout purely if there is no image */}
+                                                {!card.image && (
+                                                    <div className="absolute inset-0 bg-stone-900 p-2 flex flex-col items-center justify-center text-center">
+                                                        <span className="text-[8px] font-bold text-stone-200">{card.name}</span>
+                                                    </div>
+                                                )}
                                                 
                                                 {selectedHandIdx === idx && (
                                                     <div className="absolute inset-0 bg-stone-950/90 z-20 flex flex-col items-center justify-center gap-1 p-2">
@@ -1039,7 +1102,7 @@
                 <GameProvider>
                     <div className="flex flex-col min-h-screen">
                         <header className="bg-stone-900 border-b border-stone-800 p-3 flex justify-between items-center px-6">
-                            <h1 className="text-sm font-black tracking-widest text-amber-500 uppercase">GoldBurn V4</h1>
+                            <h1 className="text-sm font-black tracking-widest text-amber-500 uppercase">GoldBurn V3</h1>
                             {tab !== 'play' && (
                                 <nav className="flex gap-2">
                                     <button onClick={()=>setTab('lobby')} className={`text-xs px-4 py-1.5 rounded font-bold uppercase tracking-wider transition ${tab==='lobby'?'bg-stone-800 text-stone-200':'text-stone-500 hover:text-stone-300'}`}>Play</button>
