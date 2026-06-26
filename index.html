@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoldBurn V2</title>
+    <title>GoldBurn</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
@@ -23,7 +23,7 @@
         import ReactDOM from 'https://esm.sh/react-dom@18.2.0/client';
 
         // ============================================================================
-        // V3 CARD DATABASE
+        // v1 CARD DATABASE
         // ============================================================================
         const MASTER_CARDS = [
             { id: 'heart_soul', name: 'Heart and Soul', type: 'Vital', limit: 1, hp: 20, cost: 0, set: 'Core', image: 'Heart&Soul.png', description: 'Can make up to three actions per turn. Unaffected by move effects.' },
@@ -203,7 +203,7 @@
                     {/* LEFT PANEL */}
                     <div className="xl:col-span-8 bg-stone-900 border border-amber-900/30 rounded-2xl p-5 shadow-2xl flex flex-col h-[750px]">
                         <div className="border-b border-stone-800 pb-4 mb-4">
-                            <h2 className="text-lg font-bold text-amber-500 uppercase tracking-wide mb-3">Deck Builder</h2>
+                            <h2 className="text-lg font-bold text-amber-500 uppercase tracking-wide mb-3">v1 Deck Builder</h2>
                             <div className="grid grid-cols-1 md:grid-cols-6 gap-3">
                                 <input type="text" placeholder="Search by name..." value={search} onChange={(e)=>setSearch(e.target.value)} className="col-span-1 md:col-span-6 bg-stone-950 border border-stone-800 rounded px-3 py-1.5 text-stone-200 outline-none focus:border-amber-600 text-xs" />
                                 <select value={sortOrder} onChange={(e)=>setSortOrder(e.target.value)} className="col-span-1 md:col-span-2 bg-stone-950 border border-stone-800 rounded px-2 py-1.5 text-stone-300 outline-none text-xs">
@@ -364,7 +364,7 @@
         };
 
         // ============================================================================
-        // MULTIPLAYER LOBBY
+        // v1 MULTIPLAYER LOBBY
         // ============================================================================
         const Lobby = ({ onJoin }) => {
             const [username, setUsername] = useState('');
@@ -372,8 +372,8 @@
 
             return (
                 <div className="max-w-md mx-auto mt-20 bg-stone-900 border border-amber-900/30 rounded-2xl p-6 shadow-2xl text-center">
-                    <h1 className="text-2xl font-black text-amber-500 uppercase tracking-widest mb-1">GoldBurn</h1>
-                    <p className="text-xs text-stone-400 mb-6">Test Version 1</p>
+                    <h1 className="text-2xl font-black text-amber-500 uppercase tracking-widest mb-1">GoldBurn v1</h1>
+                    <p className="text-xs text-stone-400 mb-6">Peer-to-Peer Sandbox Mode</p>
                     
                     <div className="space-y-4 text-left">
                         <div>
@@ -382,7 +382,7 @@
                         </div>
                         <div>
                             <label className="text-[10px] font-bold text-stone-500 uppercase">Room Code (Leave blank to Create)</label>
-                            <input type="text" value={roomCode} onChange={e=>setRoomCode(e.target.value)} className="w-full bg-stone-950 border border-stone-800 rounded px-3 py-2 text-amber-500 uppercase outline-none focus:border-amber-600" placeholder="e.g. A12B" />
+                            <input type="text" value={roomCode} onChange={e=>setRoomCode(e.target.value)} className="w-full bg-stone-950 border border-stone-800 rounded px-3 py-2 text-amber-500 uppercase outline-none focus:border-amber-600" placeholder="e.g. BATTLE99" />
                         </div>
                         <button onClick={() => onJoin(roomCode || Math.random().toString(36).substring(2,6).toUpperCase(), username || 'Duelist', !roomCode)} className="w-full bg-gradient-to-r from-amber-800 to-amber-950 text-amber-100 font-bold uppercase py-3 rounded-lg text-xs hover:brightness-110 border border-amber-700/50 transition">
                             {roomCode ? 'Join Match' : 'Create Match'}
@@ -849,9 +849,6 @@
                     } else if (dest === 'void') {
                         setVoidZone([card, ...voidZone]);
                         addLog(`${username} exiled ${card.name} to the Void.`, true);
-                    } else if (dest === 'deck') {
-                        setDeck(prev => [...prev, card].sort(() => Math.random() - 0.5));
-                        addLog(`${username} shuffled ${card.name} into their Deck.`, true);
                     }
                 }
                 setActiveMenu(null);
@@ -919,7 +916,7 @@
                         </div>
 
                         {card.hp !== undefined && (
-                            <div className="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-1/2 bg-stone-200 text-stone-900 rounded-full w-7 h-7 flex items-center justify-center font-bold text-xs border-2 border-stone-900 shadow-lg z-20 shadow-black/50">
+                            <div className="absolute top-1/2 -translate-y-1/2 left-1 bg-stone-200 text-stone-900 rounded-full w-6 h-6 flex items-center justify-center font-bold text-xs border-2 border-stone-900 shadow-lg z-20 shadow-black/50">
                                 {card.currentHp}
                             </div>
                         )}
@@ -927,9 +924,9 @@
                         {activeMenu && showMenuParams && activeMenu.id === showMenuParams.id && (
                             <div className="absolute inset-0 bg-stone-950/95 z-30 flex flex-col justify-center items-center gap-1.5 p-2 rounded-lg">
                                 {card.hp !== undefined && (
-                                    <div className="flex gap-2 w-full justify-center mb-1">
-                                        <button onClick={(e)=>{e.stopPropagation(); modifyHealth(card.instanceId, 1)}} className="bg-emerald-900/80 hover:bg-emerald-800 text-emerald-100 text-[9px] px-3 py-1 rounded transition">+1 HP</button>
-                                        <button onClick={(e)=>{e.stopPropagation(); modifyHealth(card.instanceId, -1)}} className="bg-rose-900/80 hover:bg-rose-800 text-rose-100 text-[9px] px-3 py-1 rounded transition">-1 HP</button>
+                                    <div className="flex gap-1 w-full justify-center mb-1">
+                                        <button onClick={(e)=>{e.stopPropagation(); modifyHealth(card.instanceId, 1)}} className="bg-emerald-900/80 hover:bg-emerald-800 text-emerald-100 text-[8px] flex-1 py-0.5 rounded transition">+1 HP</button>
+                                        <button onClick={(e)=>{e.stopPropagation(); modifyHealth(card.instanceId, -1)}} className="bg-rose-900/80 hover:bg-rose-800 text-rose-100 text-[8px] flex-1 py-0.5 rounded transition">-1 HP</button>
                                     </div>
                                 )}
                                 <div className="flex gap-1 w-full">
@@ -940,7 +937,6 @@
                                 </div>
                                 <button onClick={(e)=>{e.stopPropagation(); sendFieldCardAway(showMenuParams.type, 'grave', showMenuParams.r, showMenuParams.c)}} className="bg-stone-800 hover:bg-stone-700 transition text-stone-200 text-[10px] w-full py-1 rounded">To Graveyard</button>
                                 <button onClick={(e)=>{e.stopPropagation(); sendFieldCardAway(showMenuParams.type, 'void', showMenuParams.r, showMenuParams.c)}} className="bg-indigo-900 hover:bg-indigo-800 transition text-indigo-200 text-[10px] w-full py-1 rounded">To Void</button>
-                                <button onClick={(e)=>{e.stopPropagation(); sendFieldCardAway(showMenuParams.type, 'deck', showMenuParams.r, showMenuParams.c)}} className="bg-emerald-900 hover:bg-emerald-800 transition text-emerald-200 text-[10px] w-full py-1 rounded">To Deck</button>
                                 <button onClick={(e)=>{e.stopPropagation(); setActiveMenu(null); setLockedInspectorId(null);}} className="text-[9px] text-stone-500 hover:text-stone-300 transition underline mt-1">Cancel</button>
                             </div>
                         )}
@@ -1072,7 +1068,7 @@
             // PHASE 2: MAIN BOARD SCREEN
             // ============================================================================
             return (
-                <div className="h-screen flex p-4 gap-4 max-w-[1700px] mx-auto overflow-hidden relative">
+                <div className="h-screen flex p-4 gap-4 max-w-[1700px] mx-auto overflow-hidden relative" onClick={clearInteractions}>
                     
                     {popupMsg && (
                         <div className="fixed top-[40%] left-1/2 -translate-x-1/2 z-[100] bg-stone-950/95 border border-amber-500/50 text-amber-400 font-bold px-8 py-6 rounded-2xl shadow-[0_0_40px_rgba(245,158,11,0.3)] text-xl text-center pointer-events-none animate-pulse max-w-sm backdrop-blur-sm">
@@ -1081,7 +1077,7 @@
                     )}
 
                     {/* LEFT PANEL: Logs & Trackers */}
-                    <div className="w-56 lg:w-64 flex flex-col gap-4 shrink-0 overflow-y-auto">
+                    <div className="w-56 lg:w-64 flex flex-col gap-4 shrink-0 overflow-y-auto" onClick={(e)=>e.stopPropagation()}>
                         
                         <div className="bg-stone-900 border border-stone-800 rounded-xl p-4 shadow-md">
                             <div className="flex justify-between items-center mb-1">
@@ -1177,7 +1173,7 @@
                                             <div key={`opp-row-${r}`} className="flex justify-center gap-2">
                                                 {[0,1,2].map(c => (
                                                     <div key={`opp-${r}-${c}`} className="w-[80px] h-[112px] opacity-70 cursor-pointer">
-                                                        {renderCard(oppGrid[r][c], () => { setInspectedCard(oppGrid[r][c]); setIsInspectorOpen(true); })}
+                                                        {renderCard(oppGrid[r][c], () => { setInspectedCard(oppGrid[r][c]); setLockedInspectorId(oppGrid[r][c]?.instanceId); setIsInspectorOpen(true); })}
                                                     </div>
                                                 ))}
                                             </div>
@@ -1281,7 +1277,6 @@
                                                     <div className="absolute inset-0 bg-stone-950/90 z-20 flex flex-col items-center justify-center gap-1 p-2">
                                                         <button onClick={(e)=>{e.stopPropagation(); sendHandCardAway(idx, 'grave');}} className="bg-stone-800 hover:bg-stone-700 text-stone-200 text-[9px] w-full py-1 rounded border border-stone-700 transition">To Grave</button>
                                                         <button onClick={(e)=>{e.stopPropagation(); sendHandCardAway(idx, 'void');}} className="bg-indigo-900 hover:bg-indigo-800 text-indigo-200 text-[9px] w-full py-1 rounded border border-indigo-800 transition">To Void</button>
-                                                        <button onClick={(e)=>{e.stopPropagation(); sendHandCardAway(idx, 'deck');}} className="bg-emerald-900 hover:bg-emerald-800 text-emerald-200 text-[9px] w-full py-1 rounded border border-emerald-800 transition">To Deck</button>
                                                     </div>
                                                 )}
                                             </div>
@@ -1293,7 +1288,7 @@
                     </div>
 
                     {/* RIGHT PANEL: Collapsible Tools */}
-                    <div className={`relative transition-all duration-300 ease-in-out flex flex-col bg-stone-900 border border-stone-800 rounded-xl shadow-md shrink-0 h-full ${isInspectorOpen ? 'w-[320px]' : 'w-8'}`}>
+                    <div className={`relative transition-all duration-300 ease-in-out flex flex-col bg-stone-900 border border-stone-800 rounded-xl shadow-md shrink-0 h-full ${isInspectorOpen ? 'w-[320px]' : 'w-8'}`} onClick={(e)=>e.stopPropagation()}>
                         
                         <button 
                             onClick={() => setIsInspectorOpen(!isInspectorOpen)} 
@@ -1329,9 +1324,9 @@
                                         
                                         {/* Status Markers Displayed in Inspector Overlay */}
                                         {inspectedCard.markers && (
-                                            <div className="absolute top-2 right-2 flex flex-col gap-1 z-20 pointer-events-none">
+                                            <div className="absolute top-2 right-2 flex flex-col gap-1.5 z-20 pointer-events-none">
                                                 {Object.entries(inspectedCard.markers).filter(([k,v])=>v>0).map(([color, count]) => (
-                                                    <div key={color} className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold border border-stone-950 shadow-md" style={{backgroundColor: color, color: color==='#eab308'?'black':'white'}}>{count}</div>
+                                                    <div key={color} className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 border-stone-950 shadow-md" style={{backgroundColor: color, color: color==='#eab308'?'black':'white'}}>{count}</div>
                                                 ))}
                                             </div>
                                         )}
@@ -1509,7 +1504,7 @@
                 <GameProvider>
                     <div className="flex flex-col min-h-screen">
                         <header className="bg-stone-900 border-b border-stone-800 p-3 flex justify-between items-center px-6">
-                            <h1 className="text-sm font-black tracking-widest text-amber-500 uppercase">GoldBurn V3</h1>
+                            <h1 className="text-sm font-black tracking-widest text-amber-500 uppercase">GoldBurn v1</h1>
                             {(tab === 'lobby' || tab === 'forge') && (
                                 <nav className="flex gap-2">
                                     <button onClick={()=>setTab('lobby')} className={`text-xs px-4 py-1.5 rounded font-bold uppercase tracking-wider transition ${tab==='lobby'?'bg-stone-800 text-stone-200':'text-stone-500 hover:text-stone-300'}`}>Play</button>
