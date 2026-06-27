@@ -23,9 +23,6 @@
         import ReactDOM from 'https://esm.sh/react-dom@18.2.0/client';
 
         // ============================================================================
-        // FORMATING 1500x2100 
-        // ============================================================================
-        // ============================================================================
         // FINAL CARD DATABASE
         // ============================================================================
         const MASTER_CARDS = [
@@ -70,7 +67,7 @@
             { id: 'SDDP_noblesacrifice', name: 'Noble Sacrifice', type: 'Act', subtypes: ['Slow'], limit: 3, cost: 2, burn: 2, set: 'SDDP', image: '(SDDP) NobleSacrifice.jpg', description: 'Destroy target non-vital card you control, and if you do, destroy target non-vital card your opponent controls.' },
             { id: 'SDDP_oddlyspecifichunter', name: 'Oddly, Specific Hunter', type: 'Troop', subtypes: ['Insect', 'Hunter'], limit: 3, hp: 5, cost: 3, burn: 1, set: 'SDDP', image: '(SDDP) OddlySpecificHunter.jpg', description: '(Summon): Declare a subtype; if this card attacks or is attacked by a non-vital card with the declared subtype: expel that card. If this card is attacked by a card without the declared subtype: expel this card. Spear Jab (1)- Deal 1 dmg.' },
             { id: 'SDDP_pawnoffoursides', name: 'Pawn of 4 Sides', type: 'Troop', subtypes: ['Human', 'Dice'], limit: 3, hp: 1, cost: 1, burn: 1, set: 'SDDP', image: '(SDDP) PawnofFourSides.jpg', description: 'Pawns Mighty Strike (1)- roll a d4 and deal that much dmg. if you roll a 4, re-roll and double the result instead. "I will do my best for you my liege"' },
-            //{ id: 'SDDP_pocketchange', name: 'Pocket Change', type: 'Skill', subtypes: [], limit: 3, set: 'SDDP', image: '(SDDP) PocketChange.jpg', description: 'This skill can be used thrice per game and once per turn. Gain 1 gold. This skill cannot be used on the first turn of the game.' },
+            { id: 'SDDP_pocketchange', name: 'Pocket Change', type: 'Skill', subtypes: [], limit: 3, set: 'SDDP', image: '(SDDP) PocketChange.jpg', description: 'This skill can be used thrice per game and once per turn. Gain 1 gold. This skill cannot be used on the first turn of the game.' },
             { id: 'SDDP_willofthemartyr', name: 'Will of the Martyr', type: 'Act', subtypes: ['Fast'], limit: 3, cost: 3, burn: 1, set: 'SDDP', image: '(SDDP) WilloftheMartyr.jpg', description: 'Target a card on the field; it cannot be expelled or destroyed until the end of the turn.' },
             { id: 'SDDP_ritualofthepatron', name: 'Ritual Of The Patron', type: 'Act', subtypes: ['Slow'], limit: 3, cost: 2, burn: 1, set: 'SDDP', image: '(SDDP) RitualofthePatron.jpg', description: 'Send 1 "The Patron" card from your hand or field to the GY; draw 1 card. If the sent card had Offering, draw 2 cards instead. His trial will test your devotion' },
             { id: 'SDDP_shrineofthepatron', name: 'Shrine Of The Patron', type: 'Building', subtypes: ['Deity', 'Plant'], limit: 3, hp: 7, cost: 4, burn: 1, set: 'SDDP', image: '(SDDP) ShrineofthePatron.jpg', description: 'Offering I. If a "The Patron" card was offered for this cards summon, you can activate this effect once while this card is on the field: Target a card in either players GY; resurrect it. It cannot make actions, is a plant in addition to its other types, and can be treated as a "The Patron" when offered. Mystic Aroma (1)- Deal 4 dmg. If target would be destroyed, it is expelled instead Then you will then be lead to that sacred place.' },
@@ -135,7 +132,7 @@
             { id: 'SDAG_defendersinstinct', name: 'Defenders Instinct', type: 'Act', subtypes: ['Fast'], limit: 3, cost: 2, burn: 1, set: 'SDAG', image: '(SDAG) DefendersInstinct.jpg', description: 'When your opponent uses a move that would deal dmg to a troop your control: you can redirect that dmg to another card you control.' },
             { id: 'SDAG_gravedigger', name: 'Gravedigger', type: 'Troop', subtypes: ['Undead'], limit: 3, hp: 3, cost: 3, burn: 2, set: 'SDAG', image: '(SDAG) Gravedigger.jpg', description: 'Entomb (0)- Target a card in a GY; expel that card. "That hand will NEVER give up will it?"' },
             { id: 'SDAG_longshot', name: 'Longshot', type: 'Act', subtypes: ['Fast'], limit: 3, cost: 0, burn: 1, set: 'SDAG', image: '(SDAG) Longshot.jpg', description: 'Deal 2 dmg to a card your opponent controls.' },
-            //{ id: 'SDAG_mostwanted', name: 'Most Wanted', type: 'Skill', subtypes: [], limit: 3, set: 'SDAG', image: '(SDAG) MostWanted.jpg', description: 'Target a card your opponent controls that has destroyed a card you control; If you destroy that card this turn, you gain gold equal to that cards cost.' },
+            { id: 'SDAG_mostwanted', name: 'Most Wanted', type: 'Skill', subtypes: [], limit: 3, set: 'SDAG', image: '(SDAG) MostWanted.jpg', description: 'Target a card your opponent controls that has destroyed a card you control; If you destroy that card this turn, you gain gold equal to that cards cost.' },
             { id: 'SDAG_noblesac', name: 'Noble Sacrifice', type: 'Act', subtypes: ['Slow'], limit: 3, cost: 2, burn: 2, set: 'SDAG', image: '(SDAG) NobleSac.jpg', description: 'Destroy target non-vital card you control, and if you do, destroy target non-vital card your opponent controls.' },
             { id: 'SDAG_noblessac', name: 'Noble’s Sacrifice', type: 'Act', subtypes: ['Fast'], limit: 3, cost: 5, burn: 1, set: 'SDAG', image: '(SDAG) NoblesSac.jpg', description: 'Destroy a non-vital troop your opponent controls.' },
             { id: 'SDAG_sharkbait', name: 'Shark Bait', type: 'Troop', subtypes: ['Ocean', 'Hunter'], limit: 3, hp: 3, cost: 2, burn: 2, set: 'SDAG', image: '(SDAG) SharkBait.jpg', description: 'Angler (1)- Pull this card 1, deal 2 dmg, pull target 1. Foul Hook (1)- Push this card, deal 3 dmg. if target was hit with "Angler" this move deals double dmg' },
@@ -208,16 +205,16 @@
             { id: 'S2CL_reaperofriches', name: 'Reaper of Riches', type: 'Troop', subtypes: ['Spirit'], limit: 3, hp: 3, cost: 4, burn: 2, set: 'S2CL', image: '(S2CL) ReaperOfRiches.jpg', description: 'If this card destroys a card your opponent controls, gain gold equal to the destroyed cards cost, then if "Reaper of wealth" is in your graveyard, you also gain 1 gold. Reap Life (1)- deal 1 dmg Sythe of the grave (2)- deal 2 dmg In time, he will collect all of our debts.' },
             { id: 'S2CL_soulhunter', name: 'Soul Hunter', type: 'Troop', subtypes: ['Spirit', 'Hunter'], limit: 3, hp: 4, cost: 3, burn: 1, set: 'S2CL', image: '(S2CL) SoulHunter.jpg', description: 'This card can use "Soul Tether" once in addition to its normal action. Soul Tether (1)- deal 1 dmg, target is pulled 1 Head hunt (1) deal 2 dmg. If "Soul Tether" was used on target, deal 4 dmg instead. "well- Im guessing thats our look out?"' },
             { id: 'S2CL_taxcollection', name: 'Tax Collection', type: 'Act', subtypes: ['Slow'], limit: 3, cost: 3, burn: 1, set: 'S2CL', image: '(S2CL) TaxCollection.jpg', description: 'You gain 1 gold for every non-vital troop on the field.' },
-            //{ id: 'S2CL_1111emergencyaid', name: 'Emergency Aid', type: 'Skill', subtypes: [], limit: 3, set: 'S2CL', image: '(S2CL) 1111 EmergencyAid.jpg', description: 'Heal 1 card on the field 5 HP.' },
-            //{ id: 'S2CL_1111pocketchange', name: 'Pocket Change', type: 'Skill', subtypes: [], limit: 3, set: 'S2CL', image: '(S2CL) 1111 PocketChange.jpg', description: 'This skill can be used thrice per game and once per turn. Gain 1 gold. This skill cannot be used on the first turn of the game.' },
-            //{ id: 'S2CL_1111soulofthevital', name: 'Soul of the Vital', type: 'Skill', subtypes: [], limit: 3, set: 'S2CL', image: '(S2CL) 1111 SoulOfTheVital.jpg', description: 'This skill can only be used while your Vital card has 5 or less HP. At the start of your turn, instead of drawing for turn, add a card from your deck to your hand. You dont reveal the card added to your opponent.' },
+            { id: 'S2CL_1111emergencyaid', name: 'Emergency Aid', type: 'Skill', subtypes: [], limit: 3, set: 'S2CL', image: '(S2CL) 1111 EmergencyAid.jpg', description: 'Heal 1 card on the field 5 HP.' },
+            { id: 'S2CL_1111pocketchange', name: 'Pocket Change', type: 'Skill', subtypes: [], limit: 3, set: 'S2CL', image: '(S2CL) 1111 PocketChange.jpg', description: 'This skill can be used thrice per game and once per turn. Gain 1 gold. This skill cannot be used on the first turn of the game.' },
+            { id: 'S2CL_1111soulofthevital', name: 'Soul of the Vital', type: 'Skill', subtypes: [], limit: 3, set: 'S2CL', image: '(S2CL) 1111 SoulOfTheVital.jpg', description: 'This skill can only be used while your Vital card has 5 or less HP. At the start of your turn, instead of drawing for turn, add a card from your deck to your hand. You dont reveal the card added to your opponent.' },
             { id: 'S2CL_ammosurpluus', name: 'Ammo Surplus', type: 'Act', subtypes: ['Fast'], limit: 3, cost: 3, burn: 2, set: 'S2CL', image: '(S2CL) AmmoSurpluus.jpg', description: 'Target a card you control; place 2 Cannon ball markers on it' },
             
                     // ============================================================================
                     // Dead Of Winter
                     // ============================================================================
             { id: 'DOW_dreadhusk', name: 'Dread Husk', type: 'Troop', subtypes: ['Undead', 'Ice'], limit: 3, hp: 2, cost: 2, burn: 1, set: 'DOW', image: '(DOW) DreadHusk.jpg', description: 'You can remove 2 frozen counters from the field; resurrect this card. If this card is resurrected: place 2 poison counters on the field. Ice Decay (0)- send this card to the graveyard; place 1 frozen counter on a the non-vital card on the field Ice Claw (0)- deal 2 dmg' },
-            //{ id: 'DOW_1111absolutezero', name: 'Absolute Zero', type: 'Skill', subtypes: [], limit: 3, set: 'DOW', image: '(DOW) 1111 AbsoluteZero.jpg', description: 'Can only be used while your vitals HP is 10 or less. place 4 frozen counters on a non-vital card your opponent controls.' },
+            { id: 'DOW_1111absolutezero', name: 'Absolute Zero', type: 'Skill', subtypes: [], limit: 3, set: 'DOW', image: '(DOW) 1111 AbsoluteZero.jpg', description: 'Can only be used while your vitals HP is 10 or less. place 4 frozen counters on a non-vital card your opponent controls.' },
             { id: 'DOW_abyssalrupture', name: 'Abyssal Rupture', type: 'Act', subtypes: ['Slow'], limit: 3, cost: 4, burn: 2, set: 'DOW', image: '(DOW) AbyssalRupture.jpg', description: 'Summon one of your expelled troops for no cost. "Captain. permanent just became a lot less permanent."' },
             { id: 'DOW_allseeingeye', name: 'All Seeing Eye', type: 'Act', subtypes: ['Slow'], limit: 3, cost: 0, burn: 0, set: 'DOW', image: '(DOW) AllSeeingEye.jpg', description: 'All players reveal their hand. "secret secrets are no fun unless you share with everyone"' },
             { id: 'DOW_banishmentofthetwins', name: 'Banishment of the twins', type: 'Act', subtypes: ['Fast'], limit: 3, cost: 4, burn: 1, set: 'DOW', image: '(DOW) BanishmentOfTheTwins.jpg', description: 'if your opponent controls 2 or more cards with the same name: expel all cards with that name from your opponents field and GY. And for their misdeeds, the twins were sentenced to life in prison, never to see the light of day ever again.' },
@@ -248,9 +245,9 @@
                     // Power Escalation
                     // ============================================================================
             { id: 'PE_deusstriker', name: 'Deus Striker', type: 'Troop', subtypes: ['Spirit', 'Hunter'], limit: 3, hp: 5, cost: 8, burn: 3, set: 'PE', image: '(PE) DeusStriker.jpg', description: 'If a card you control is destroyed by your opponent: You can summon this card from your hand for no cost. (Summon): Place 3 Strength markers on this card. If this card is destroyed: summon 1 spirit from your deck for no cost. Ghost Knuckle (1)- deal 1 dmg' },
-            //{ id: 'PE_1111adrenaline', name: 'Adrenaline', type: 'Skill', subtypes: [], limit: 3, set: 'PE', image: '(PE) 1111 Adrenaline.jpg', description: 'Target a card you control; it can make an additional action this turn' },
-            //{ id: 'PE_1111desperatestruggle', name: 'Desperate Struggle', type: 'Skill', subtypes: [], limit: 3, set: 'PE', image: '(PE) 1111 DesperateStruggle.jpg', description: 'Activate this skill when a non-vital troop your opponent controls would destroy a troop you control. Both cards HP become 1 instead.' },
-            //{ id: 'PE_1111nooneleftbehind', name: 'No One Left Behind', type: 'Skill', subtypes: [], limit: 3, set: 'PE', image: '(PE) 1111 NoOneLeftBehind.jpg', description: 'Can only be used immediately after a card you control is destroyed by your opponents card. add that card to your hand.' },
+            { id: 'PE_1111adrenaline', name: 'Adrenaline', type: 'Skill', subtypes: [], limit: 3, set: 'PE', image: '(PE) 1111 Adrenaline.jpg', description: 'Target a card you control; it can make an additional action this turn' },
+            { id: 'PE_1111desperatestruggle', name: 'Desperate Struggle', type: 'Skill', subtypes: [], limit: 3, set: 'PE', image: '(PE) 1111 DesperateStruggle.jpg', description: 'Activate this skill when a non-vital troop your opponent controls would destroy a troop you control. Both cards HP become 1 instead.' },
+            { id: 'PE_1111nooneleftbehind', name: 'No One Left Behind', type: 'Skill', subtypes: [], limit: 3, set: 'PE', image: '(PE) 1111 NoOneLeftBehind.jpg', description: 'Can only be used immediately after a card you control is destroyed by your opponents card. add that card to your hand.' },
             { id: 'PE_avatarofhotandcold', name: 'Avatar of hot and cold', type: 'Troop', subtypes: ['Human', 'Mage'], limit: 3, hp: 4, cost: 4, burn: 2, set: 'PE', image: '(PE) AvatarOfHotAndCold.jpg', description: 'This card can use Freezer Burn In addition to its normal action. Frozen Knuckle (2)- deal 2 dmg, push target 1, place 2 frozen counters on target. Freezer Burn (1)- deal 3 dmg. this attack deals 2 more dmg for every frozen counter on target.' },
             { id: 'PE_banditscaptain', name: 'Bandit’s Captain', type: 'Vital', subtypes: ['Human', 'Bandit'], limit: 1, hp: 20, cost: 0, burn: 0, set: 'PE', image: '(PE) BanditsCaptain.jpg', description: 'Prepare (0)- Gain 1 gold Command (2)- (single) target a "Bandit" you control; change one of its attacks targeting tiles to until the end of the turn. Overconfidence (2)- (single) deal 4 dmg to up to 2 seperate targets.' },
             { id: 'PE_defdreadman', name: 'DEF- Dreadman', type: 'Troop', subtypes: ['Undead', 'Tank'], limit: 3, hp: 6, cost: 4, burn: 2, set: 'PE', image: '(PE) DEFDreadman.jpg', description: '(Summon): Place 2 Cannon Ball markers or 2 Poison counters on the field. This card does not take dmg from poison counters. Poisoned Punch (0)- Deal X dmg where X is the amount of poison counters on target Acid Chuck (0)- Remove X poison counters from this card; Deal X dmg. if this moves destroys a card place X poison counters on the field' },
@@ -316,8 +313,8 @@
                     // Blood Money
                     // ============================================================================
             { id: 'BM_banditguardian', name: 'Bandit Guardian', type: 'Troop', subtypes: ['Human', 'Bandit'], limit: 3, hp: 3, cost: 4, burn: 2, set: 'BM', image: '(BM) BanditGuardian.jpg', description: 'Unexpected. (this card can be summoned on your opponent’s turn as a response and is considered fast.) (Summon): Target a bandit you control; it cannot be destroyed or take dmg until the end of the turn. Narrow Slash (1)- (Fast) Deal 3 dmg "Hey Ugly! Why dont you take ME on instead!?"' },
-            //{ id: 'BM_1111mostwanted', name: 'Most Wanted', type: 'Skill', subtypes: [], limit: 3, set: 'BM', image: '(BM) 1111 MostWanted.jpg', description: 'Target a card your opponent controls that has destroyed a card you control; If you destroy that card this turn, you gain gold equal to that card’s cost.' },
-            //{ id: 'BM_1111vigor', name: 'Vigor', type: 'Skill', subtypes: [], limit: 3, set: 'BM', image: '(BM) 1111 Vigor.jpg', description: 'You can activate this skill once per turn and thrice per game. Target a non-vital card you control; it deals +1 dmg until the end of the turn.' },
+            { id: 'BM_1111mostwanted', name: 'Most Wanted', type: 'Skill', subtypes: [], limit: 3, set: 'BM', image: '(BM) 1111 MostWanted.jpg', description: 'Target a card your opponent controls that has destroyed a card you control; If you destroy that card this turn, you gain gold equal to that card’s cost.' },
+            { id: 'BM_1111vigor', name: 'Vigor', type: 'Skill', subtypes: [], limit: 3, set: 'BM', image: '(BM) 1111 Vigor.jpg', description: 'You can activate this skill once per turn and thrice per game. Target a non-vital card you control; it deals +1 dmg until the end of the turn.' },
             { id: 'BM_abominablevessel', name: 'Abominable Vessel', type: 'Troop', subtypes: ['Abomination'], limit: 3, hp: 7, cost: 5, burn: 2, set: 'BM', image: '(BM) AbominableVessel.jpg', description: 'Offering I. Exile the card used for this card’s offering instead of sending it to the GY. If this card leaves the field: (Hard Single) Summon the card that was exiled for this card’s offering for no cost. It cannot attack. Claw Crush (1)- deal 5 dmg' },
             { id: 'BM_aurumassassin', name: 'Aurum Assassin', type: 'Troop', subtypes: ['Insect', 'Hunter'], limit: 3, hp: 4, cost: 4, burn: 1, set: 'BM', image: '(BM) AurumAssassin.jpg', description: 'If this card attacks a non-vital card with a bounty marker: expel that card. Bounty (0)- Place 1 Bounty Marker on target Infiltrate (1)- (Column) Deal 1 dmg' },
             { id: 'BM_aurumbondswoman', name: 'Aurum Bondswoman', type: 'Troop', subtypes: ['Human', 'Hunter'], limit: 3, hp: 1, cost: 1, burn: 2, set: 'BM', image: '(BM) AurumBondswoman.jpg', description: 'Cards your opponent controls with bounty markers cannot attack this card. If a hunter you control destroys a card your opponent controls with a bounty marker: gain 1 gold. Bounty (0)- Place 1 Bounty Marker on target' },
@@ -350,8 +347,8 @@
                     // Crimson Onslaught
                     // ============================================================================
             { id: 'CO_crimsonlesserbat', name: 'Crimson Lesser Bat', type: 'Troop', subtypes: ['Bat'], limit: 3, hp: 2, cost: 4, burn: 1, set: 'CO', image: '(CO) CrimsonLesserBat.jpg', description: 'At the end of your opponent’s turn: you can expel this card; summon 1 Vampire from your deck for no cost. Bat Bite (1)- Deal 1 dmg.' },
-            //{ id: 'CO_1111anemic', name: 'Anemic', type: 'Skill', subtypes: [], limit: 3, set: 'CO', image: '(CO) 1111 Anemic.jpg', description: 'Until the end of your next turn, cards on the field cannot be healed. You cannot activate this skill the turn you healed a card you control' },
-            //{ id: 'CO_1111infection', name: 'Infection', type: 'Skill', subtypes: [], limit: 3, set: 'CO', image: '(CO) 1111 Infection.jpg', description: 'Place 3 poison counters on a card on the field.' },
+            { id: 'CO_1111anemic', name: 'Anemic', type: 'Skill', subtypes: [], limit: 3, set: 'CO', image: '(CO) 1111 Anemic.jpg', description: 'Until the end of your next turn, cards on the field cannot be healed. You cannot activate this skill the turn you healed a card you control' },
+            { id: 'CO_1111infection', name: 'Infection', type: 'Skill', subtypes: [], limit: 3, set: 'CO', image: '(CO) 1111 Infection.jpg', description: 'Place 3 poison counters on a card on the field.' },
             { id: 'CO_sacredguardofthepatron', name: 'Sacred Guard of The Patron', type: 'Troop', subtypes: ['Human', 'Cultist', 'Warrior'], limit: 3, hp: 8, cost: 5, burn: 2, set: 'CO', image: '(CO) acredGuardOfThePatron.jpg', description: 'Offering I. This card can be summoned without an offering. If so, its base HP is 4. If a "The Patron" card was offered for this card’s summon, this card can enter the field with a strength marker or a withstand marker. Defend Him (1) Deal 5 dmg. His guards will meet you at the entrance and usher you inside.' },
             { id: 'CO_attactus', name: 'Attactus', type: 'Troop', subtypes: ['Plant'], limit: 3, hp: 6, cost: 4, burn: 2, set: 'CO', image: '(CO) Attactus.jpg', description: 'If this card is dealt dmg by an attacking card, this card deals 2 dmg to the attacking card. Spined (2)- Deal 4 dmg. Non-vital target cannot make any actions and this card can only use "Release" until either card leaves the field. Release (0)- End the effects of "Spined" made by this card. Dominick Rodriguez' },
             { id: 'CO_crimsonbloodmoon', name: 'Crimson Blood Moon', type: 'Zone', subtypes: [], limit: 3, set: 'CO', image: '(CO) CrimsonBloodMoon.jpg', description: 'Once per turn, If a vampire you control destroys a card your opponent controls, you can activate this effect: That vampire gains Bloodthirsty until this card leaves the field.' },
@@ -388,13 +385,13 @@
                     // Dice World
                     // ============================================================================
             { id: 'DW_dapperdealmon', name: 'Dapper Dealmon', type: 'Troop', subtypes: ['Demon'], limit: 3, hp: 5, cost: 4, burn: 1, set: 'DW', image: '(DW) DapperDealmon.jpg', description: 'Let’s Make a Deal (0)- Choose one: Both players draw 1 card, OR both players gain 2 gold. "Pleasure doing business with you."' },
-            //{ id: 'DW_2222mirageduelist', name: 'Mirage Duelist', type: 'Troop', subtypes: ['Illusion', 'Warrior'], limit: 3, hp: 3, cost: 3, burn: 1, set: 'DW', image: '(DW) 2222 MirageDuelist.jpg', description: 'Vanishing Strike (1)- deal 3 dmg. This card is expelled at the end of the turn if it used an attack action this turn.' },
-            //{ id: 'DW_2222mirageflamecaster', name: 'Mirage Flamecaster', type: 'Troop', subtypes: ['Illusion', 'Mage', 'Fire'], limit: 3, hp: 2, cost: 3, burn: 1, set: 'DW', image: '(DW) 2222 MirageFlamecaster.jpg', description: 'Phantom Blast (1)- deal 2 dmg to target and place 1 burn marker on it. This troop vanishes into thin air upon taking damage.' },
-            //{ id: 'DW_2222miragefledgling', name: 'Mirage Fledgling', type: 'Troop', subtypes: ['Illusion', 'Avian'], limit: 3, hp: 1, cost: 1, burn: 1, set: 'DW', image: '(DW) 2222 MirageFledgling.jpg', description: 'Flying. Feather Illusion (0)- Swap the positions of this card and another Illusion troop you control.' },
-            //{ id: 'DW_2222mirageguildmaster', name: 'Mirage Guildmaster', type: 'Vital', subtypes: ['Illusion', 'Rogue'], limit: 1, hp: 20, cost: 0, burn: 0, set: 'DW', image: '(DW) 2222 MirageGuildmaster.jpg', description: 'Prepare (0)- Gain 1 gold Grand Illusion (3)- (Single) Summon 2 Illusion troops from your hand or deck for no cost. They are expelled at the end of the turn.' },
-            //{ id: 'DW_2222miragemindmage', name: 'Mirage Mindmage', type: 'Troop', subtypes: ['Illusion', 'Mage'], limit: 3, hp: 3, cost: 4, burn: 2, set: 'DW', image: '(DW) 2222 MirageMindmage.jpg', description: 'Mind Trick (1)- target non-vital troop cannot use moves or attack actions during its controller’s next turn.' },
-            //{ id: 'DW_2222miragerogue', name: 'Mirage Rogue', type: 'Troop', subtypes: ['Illusion', 'Rogue'], limit: 3, hp: 2, cost: 2, burn: 1, set: 'DW', image: '(DW) 2222 MirageRogue.jpg', description: 'Sneak Attack (1)- deal 2 dmg. This attack ignores Withstand markers on the target.' },
-            //{ id: 'DW_2222miragescoundrel', name: 'Mirage Scoundrel', type: 'Troop', subtypes: ['Illusion', 'Bandit'], limit: 3, hp: 4, cost: 3, burn: 1, set: 'DW', image: '(DW) 2222 MirageScoundrel.jpg', description: 'Distraction (0)- move target enemy non-vital card 1 tile in any direction.' },
+            { id: 'DW_2222mirageduelist', name: 'Mirage Duelist', type: 'Troop', subtypes: ['Illusion', 'Warrior'], limit: 3, hp: 3, cost: 3, burn: 1, set: 'DW', image: '(DW) 2222 MirageDuelist.jpg', description: 'Vanishing Strike (1)- deal 3 dmg. This card is expelled at the end of the turn if it used an attack action this turn.' },
+            { id: 'DW_2222mirageflamecaster', name: 'Mirage Flamecaster', type: 'Troop', subtypes: ['Illusion', 'Mage', 'Fire'], limit: 3, hp: 2, cost: 3, burn: 1, set: 'DW', image: '(DW) 2222 MirageFlamecaster.jpg', description: 'Phantom Blast (1)- deal 2 dmg to target and place 1 burn marker on it. This troop vanishes into thin air upon taking damage.' },
+            { id: 'DW_2222miragefledgling', name: 'Mirage Fledgling', type: 'Troop', subtypes: ['Illusion', 'Avian'], limit: 3, hp: 1, cost: 1, burn: 1, set: 'DW', image: '(DW) 2222 MirageFledgling.jpg', description: 'Flying. Feather Illusion (0)- Swap the positions of this card and another Illusion troop you control.' },
+            { id: 'DW_2222mirageguildmaster', name: 'Mirage Guildmaster', type: 'Vital', subtypes: ['Illusion', 'Rogue'], limit: 1, hp: 20, cost: 0, burn: 0, set: 'DW', image: '(DW) 2222 MirageGuildmaster.jpg', description: 'Prepare (0)- Gain 1 gold Grand Illusion (3)- (Single) Summon 2 Illusion troops from your hand or deck for no cost. They are expelled at the end of the turn.' },
+            { id: 'DW_2222miragemindmage', name: 'Mirage Mindmage', type: 'Troop', subtypes: ['Illusion', 'Mage'], limit: 3, hp: 3, cost: 4, burn: 2, set: 'DW', image: '(DW) 2222 MirageMindmage.jpg', description: 'Mind Trick (1)- target non-vital troop cannot use moves or attack actions during its controller’s next turn.' },
+            { id: 'DW_2222miragerogue', name: 'Mirage Rogue', type: 'Troop', subtypes: ['Illusion', 'Rogue'], limit: 3, hp: 2, cost: 2, burn: 1, set: 'DW', image: '(DW) 2222 MirageRogue.jpg', description: 'Sneak Attack (1)- deal 2 dmg. This attack ignores Withstand markers on the target.' },
+            { id: 'DW_2222miragescoundrel', name: 'Mirage Scoundrel', type: 'Troop', subtypes: ['Illusion', 'Bandit'], limit: 3, hp: 4, cost: 3, burn: 1, set: 'DW', image: '(DW) 2222 MirageScoundrel.jpg', description: 'Distraction (0)- move target enemy non-vital card 1 tile in any direction.' },
             { id: 'DW_aurumplantplunderer', name: 'Aurum Plant Plunderer', type: 'Troop', subtypes: ['Human', 'Hunter'], limit: 3, hp: 4, cost: 3, burn: 1, set: 'DW', image: '(DW) AurumPlantPlunderer.jpg', description: 'Bounty (0)- Place 1 Bounty Marker on target. Plunder (1)- deal 2 dmg to a Plant or a card with a bounty marker; if it is destroyed, gain 2 gold.' },
             { id: 'DW_crimsonheir', name: 'Crimson Heir', type: 'Troop', subtypes: ['Vampire'], limit: 3, hp: 5, cost: 4, burn: 2, set: 'DW', image: '(DW) CrimsonHeir.jpg', description: 'Bloodthirsty. Inherited Power (0)- remove 1 Blood token from a card you control; this card gains 1 strength marker.' },
             { id: 'DW_nogodsomasters', name: 'No Gods, No Masters', type: 'Act', subtypes: ['Slow'], limit: 3, cost: 5, burn: 2, set: 'DW', image: '(DW) NoGodsNoMasters.jpg', description: 'Destroy all Deity, Demon, and Mythical cards on the field.' },
@@ -564,13 +561,9 @@ const STARTER_DECKS = {
         'SDDP_tradinghall': 1
     }
 };
-        
+
         const MARKER_COLORS = [
-            { bg: '#ef4444', name: 'Red' },
-            { bg: '#22c55e', name: 'Green' },
-            { bg: '#3b82f6', name: 'Blue' },
-            { bg: '#a855f7', name: 'Purple' },
-            { bg: '#eab308', name: 'Yellow' }
+            { bg: '#ef4444', name: 'Red' }, { bg: '#22c55e', name: 'Green' }, { bg: '#3b82f6', name: 'Blue' }, { bg: '#a855f7', name: 'Purple' }, { bg: '#eab308', name: 'Yellow' }
         ];
 
         const GameContext = createContext();
@@ -628,12 +621,17 @@ const STARTER_DECKS = {
         // ============================================================================
         const DeckBuilder = ({ onTestDeck }) => {
             const { customDeck, updateDeckQty, loadEntireDeck } = useContext(GameContext);
-            
             const [search, setSearch] = useState('');
+            const [searchKeyword, setSearchKeyword] = useState('');
             const [costFilter, setCostFilter] = useState('All');
             const [typeFilter, setTypeFilter] = useState('All');
             const [setFilter, setSetFilter] = useState('All');
             const [sortOrder, setSortOrder] = useState('A-Z');
+            
+            const [selectedSubtypes, setSelectedSubtypes] = useState([]);
+            const [selectedSpeeds, setSelectedSpeeds] = useState([]);
+            const [showSubtypeMenu, setShowSubtypeMenu] = useState(false);
+
             const [zoomedCard, setZoomedCard] = useState(null);
 
             const [selectedStarter, setSelectedStarter] = useState(Object.keys(STARTER_DECKS)[0]);
@@ -642,16 +640,46 @@ const STARTER_DECKS = {
             const uniqueTypes = [...new Set(MASTER_CARDS.map(c => c.type))].sort();
             const uniqueSets = [...new Set(MASTER_CARDS.map(c => c.set))].sort();
 
-            const incCost = () => setCostFilter(prev => prev === 'All' ? 0 : prev + 1);
-            const decCost = () => setCostFilter(prev => prev === 'All' ? 0 : Math.max(0, prev - 1));
+            // Extract all unique subtypes dynamically, ignoring 'Fast' and 'Slow'
+            const allSubtypes = useMemo(() => {
+                const subtypes = new Set();
+                MASTER_CARDS.forEach(c => {
+                    if (c.subtypes) c.subtypes.forEach(st => subtypes.add(st));
+                });
+                subtypes.delete('Fast');
+                subtypes.delete('Slow');
+                return Array.from(subtypes).sort();
+            }, []);
+
+            const incCost = () => setCostFilter(prev => prev === 'All' ? 0 : prev === 'X' ? 0 : prev + 1);
+            const decCost = () => setCostFilter(prev => prev === 'All' ? 0 : prev === 'X' ? 0 : Math.max(0, prev - 1));
             const clearCost = () => setCostFilter('All');
+            const setCostToX = () => setCostFilter('X');
+
+            const handleSubtypeToggle = (st) => {
+                setSelectedSubtypes(prev => prev.includes(st) ? prev.filter(s => s !== st) : [...prev, st]);
+            };
+
+            const handleSpeedToggle = (speed) => {
+                setSelectedSpeeds(prev => prev.includes(speed) ? prev.filter(s => s !== speed) : [...prev, speed]);
+            };
 
             const filteredCards = useMemo(() => {
                 let result = MASTER_CARDS.filter(card => {
                     if (search && !card.name.toLowerCase().includes(search.toLowerCase())) return false;
+                    if (searchKeyword && (!card.description || !card.description.toLowerCase().includes(searchKeyword.toLowerCase()))) return false;
+                    
                     if (costFilter !== 'All' && card.cost !== costFilter) return false;
                     if (typeFilter !== 'All' && card.type !== typeFilter) return false;
                     if (setFilter !== 'All' && card.set !== setFilter) return false;
+
+                    if (selectedSubtypes.length > 0) {
+                        if (!card.subtypes || !selectedSubtypes.some(st => card.subtypes.includes(st))) return false;
+                    }
+                    if (selectedSpeeds.length > 0) {
+                        if (!card.subtypes || !selectedSpeeds.some(st => card.subtypes.includes(st))) return false;
+                    }
+
                     return true;
                 });
                 result.sort((a, b) => {
@@ -660,7 +688,7 @@ const STARTER_DECKS = {
                     return 0;
                 });
                 return result;
-            }, [search, costFilter, typeFilter, setFilter, sortOrder]);
+            }, [search, searchKeyword, costFilter, typeFilter, setFilter, sortOrder, selectedSubtypes, selectedSpeeds]);
 
             const deckEntries = Object.entries(customDeck);
             const vitalEntries = deckEntries.filter(([id]) => MASTER_CARDS.find(c => c.id === id)?.type === 'Vital');
@@ -701,28 +729,61 @@ const STARTER_DECKS = {
                 <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 p-6 max-w-[1500px] mx-auto">
                     {/* LEFT PANEL */}
                     <div className="xl:col-span-8 bg-stone-900 border border-amber-900/30 rounded-2xl p-5 shadow-2xl flex flex-col h-[750px]">
+                        
                         <div className="border-b border-stone-800 pb-4 mb-4">
                             <h2 className="text-lg font-bold text-amber-500 uppercase tracking-wide mb-3">Deck Builder</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-6 gap-3">
-                                <input type="text" placeholder="Search by name..." value={search} onChange={(e)=>setSearch(e.target.value)} className="col-span-1 md:col-span-6 bg-stone-950 border border-stone-800 rounded px-3 py-1.5 text-stone-200 outline-none focus:border-amber-600 text-xs" />
-                                <select value={sortOrder} onChange={(e)=>setSortOrder(e.target.value)} className="col-span-1 md:col-span-2 bg-stone-950 border border-stone-800 rounded px-2 py-1.5 text-stone-300 outline-none text-xs">
-                                    <option value="A-Z">Sort: A - Z</option><option value="Z-A">Sort: Z - A</option>
-                                </select>
-                                <div className="col-span-1 md:col-span-2 flex items-center justify-between bg-stone-950 border border-stone-800 rounded px-2 py-1 text-xs">
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mb-3">
+                                <input type="text" placeholder="Search by Card Name..." value={search} onChange={(e)=>setSearch(e.target.value)} className="col-span-1 md:col-span-3 bg-stone-950 border border-stone-800 rounded px-3 py-1.5 text-stone-200 outline-none focus:border-amber-600 text-xs" />
+                                <input type="text" placeholder="Search Descriptions/Keywords..." value={searchKeyword} onChange={(e)=>setSearchKeyword(e.target.value)} className="col-span-1 md:col-span-3 bg-stone-950 border border-stone-800 rounded px-3 py-1.5 text-stone-200 outline-none focus:border-amber-600 text-xs" />
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 bg-stone-950 border border-stone-800 p-2 rounded text-xs mb-3 items-center">
+                                <div className="col-span-1 flex items-center justify-between">
                                     <span className="text-stone-400 font-bold">Cost:</span>
                                     <div className="flex items-center">
                                         <button onClick={decCost} className="bg-stone-800 hover:bg-stone-700 text-stone-200 w-5 h-5 rounded flex items-center justify-center">-</button>
                                         <span className="w-8 text-center text-amber-500 font-bold">{costFilter}</span>
                                         <button onClick={incCost} className="bg-stone-800 hover:bg-stone-700 text-stone-200 w-5 h-5 rounded flex items-center justify-center">+</button>
-                                        {costFilter !== 'All' && <button onClick={clearCost} className="ml-2 text-rose-500 hover:text-rose-400 font-bold">X</button>}
+                                        <button onClick={setCostToX} className={`ml-1 px-2 h-5 rounded font-bold text-[10px] flex items-center justify-center transition ${costFilter === 'X' ? 'bg-amber-600 text-stone-900' : 'bg-stone-800 hover:bg-stone-700 text-stone-200'}`}>X</button>
+                                        {costFilter !== 'All' && <button onClick={clearCost} className="ml-2 text-rose-500 hover:text-rose-400 font-bold" title="Clear Cost Filter">X</button>}
                                     </div>
                                 </div>
-                                <select value={typeFilter} onChange={(e)=>setTypeFilter(e.target.value)} className="col-span-1 bg-stone-950 border border-stone-800 rounded px-2 py-1.5 text-stone-300 outline-none text-xs">
+                                <select value={sortOrder} onChange={(e)=>setSortOrder(e.target.value)} className="col-span-1 bg-stone-900 border border-stone-700 rounded px-2 py-1.5 text-stone-300 outline-none">
+                                    <option value="A-Z">Sort: A - Z</option><option value="Z-A">Sort: Z - A</option>
+                                </select>
+                                <select value={typeFilter} onChange={(e)=>setTypeFilter(e.target.value)} className="col-span-1 bg-stone-900 border border-stone-700 rounded px-2 py-1.5 text-stone-300 outline-none">
                                     <option value="All">All Types</option>{uniqueTypes.map(type => <option key={type} value={type}>{type}</option>)}
                                 </select>
-                                <select value={setFilter} onChange={(e)=>setSetFilter(e.target.value)} className="col-span-1 bg-stone-950 border border-stone-800 rounded px-2 py-1.5 text-stone-300 outline-none text-xs">
+                                <select value={setFilter} onChange={(e)=>setSetFilter(e.target.value)} className="col-span-1 bg-stone-900 border border-stone-700 rounded px-2 py-1.5 text-stone-300 outline-none">
                                     <option value="All">All Sets</option>{uniqueSets.map(set => <option key={set} value={set}>{set}</option>)}
                                 </select>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row gap-4 bg-stone-950 border border-stone-800 p-2 rounded text-xs">
+                                <div className="flex flex-col gap-1 min-w-[120px] border-r border-stone-800 pr-3">
+                                    <span className="text-stone-500 font-bold uppercase tracking-widest text-[9px]">Act Speeds</span>
+                                    <div className="flex gap-3">
+                                        <label className="flex items-center gap-1 text-stone-300 cursor-pointer hover:text-amber-400 transition"><input type="checkbox" checked={selectedSpeeds.includes('Fast')} onChange={() => handleSpeedToggle('Fast')} className="accent-amber-600" /> Fast</label>
+                                        <label className="flex items-center gap-1 text-stone-300 cursor-pointer hover:text-amber-400 transition"><input type="checkbox" checked={selectedSpeeds.includes('Slow')} onChange={() => handleSpeedToggle('Slow')} className="accent-amber-600" /> Slow</label>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex-1 relative">
+                                    <button onClick={() => setShowSubtypeMenu(!showSubtypeMenu)} className="bg-stone-900 border border-stone-700 hover:border-amber-700 text-stone-300 px-3 py-1 rounded w-full text-left flex justify-between items-center transition">
+                                        <span>Filter by Subtypes ({selectedSubtypes.length} selected)</span>
+                                        <span className="text-stone-500">{showSubtypeMenu ? '▲' : '▼'}</span>
+                                    </button>
+                                    {showSubtypeMenu && (
+                                        <div className="absolute top-full left-0 right-0 mt-1 bg-stone-900 border border-stone-700 p-3 rounded shadow-xl z-30 max-h-48 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                                            {allSubtypes.map(st => (
+                                                <label key={st} className="flex items-center gap-1.5 text-stone-300 whitespace-nowrap cursor-pointer hover:text-amber-400 transition">
+                                                    <input type="checkbox" checked={selectedSubtypes.includes(st)} onChange={() => handleSubtypeToggle(st)} className="accent-amber-600" /> {st}
+                                                </label>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
@@ -731,6 +792,7 @@ const STARTER_DECKS = {
                                 const qty = customDeck[card.id] || 0;
                                 const limit = card.limit !== undefined ? card.limit : 3;
                                 const maxReached = qty >= limit;
+
                                 return (
                                     <div key={card.id} className="bg-stone-950 border border-stone-850 p-3 rounded-xl flex flex-col hover:border-amber-900 transition h-48">
                                         <div className="shrink-0">
@@ -780,7 +842,12 @@ const STARTER_DECKS = {
                                             return c ? (
                                                 <div key={id} className="bg-stone-950 border border-stone-800 px-3 py-2 rounded-xl flex justify-between items-center group">
                                                     <div>
-                                                        <div className="text-xs font-bold text-stone-200">{c.name}</div>
+                                                        <div className="flex items-center gap-2 mb-0.5">
+                                                            <div className="text-xs font-bold text-stone-200">{c.name}</div>
+                                                            <button onClick={(e) => { e.stopPropagation(); setZoomedCard(c); }} className="text-stone-500 hover:text-amber-400 transition" title="Preview Card">
+                                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                                            </button>
+                                                        </div>
                                                         <div className="text-[9px] text-amber-500">{c.type}</div>
                                                     </div>
                                                     <div className="flex items-center gap-3">
@@ -800,7 +867,12 @@ const STARTER_DECKS = {
                                             return c ? (
                                                 <div key={id} className="bg-stone-950 border border-stone-850 px-3 py-2 rounded-xl flex justify-between items-center group">
                                                     <div>
-                                                        <div className="text-xs font-bold text-stone-300">{c.name}</div>
+                                                        <div className="flex items-center gap-2 mb-0.5">
+                                                            <div className="text-xs font-bold text-stone-300">{c.name}</div>
+                                                            <button onClick={(e) => { e.stopPropagation(); setZoomedCard(c); }} className="text-stone-500 hover:text-amber-400 transition" title="Preview Card">
+                                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                                            </button>
+                                                        </div>
                                                         <div className="text-[9px] text-stone-500">{c.type}</div>
                                                     </div>
                                                     <div className="flex items-center gap-3">
@@ -844,7 +916,7 @@ const STARTER_DECKS = {
 
                     {/* ZOOM MODAL */}
                     {zoomedCard && (
-                        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setZoomedCard(null)}>
+                        <div className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setZoomedCard(null)}>
                             <div className="w-[300px] h-[420px] sm:w-[400px] sm:h-[560px] relative rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-700" onClick={e => e.stopPropagation()}>
                                 {zoomedCard.image ? (
                                      <img src={zoomedCard.image} alt={zoomedCard.name} className="w-full h-full object-cover" />
@@ -904,15 +976,15 @@ const STARTER_DECKS = {
             const [myVitalLocked, setMyVitalLocked] = useState(false);
             const [oppVitalLocked, setOppVitalLocked] = useState(false);
             const [vitalCardInst, setVitalCardInst] = useState(null);
-
             const [gold, setGold] = useState(isHost ? 3 : 0);
+            
             const [deck, setDeck] = useState([]);
             const [hand, setHand] = useState([]);
             const [grave, setGrave] = useState([]);
             const [voidZone, setVoidZone] = useState([]);
             const [myGrid, setMyGrid] = useState([ [null, null, null], [null, null, null] ]);
             const [actSlot, setActSlot] = useState(null);
-
+            
             const [oppGold, setOppGold] = useState(isHost ? 0 : 3);
             const [oppHandCount, setOppHandCount] = useState(5);
             const [oppDeckCount, setOppDeckCount] = useState(0);
@@ -920,7 +992,7 @@ const STARTER_DECKS = {
             const [oppVoid, setOppVoid] = useState([]);
             const [oppGrid, setOppGrid] = useState([ [null, null, null], [null, null, null] ]);
             const [oppActSlot, setOppActSlot] = useState(null);
-
+            
             const [sharedZone, setSharedZone] = useState(null); 
             const [logs, setLogs] = useState([]);
             
@@ -930,13 +1002,13 @@ const STARTER_DECKS = {
             const [isInspectorOpen, setIsInspectorOpen] = useState(true);
             const [showMarkersUI, setShowMarkersUI] = useState(false);
             const [diceType, setDiceType] = useState('6');
-
+            
             const [viewModal, setViewModal] = useState({ isOpen: false, title: '', cards: [], type: null, onSelect: null });
             const [activeMenu, setActiveMenu] = useState(null);
             const [zoomedCard, setZoomedCard] = useState(null);
             const [modalSelectedIdx, setModalSelectedIdx] = useState(null);
-            const [movingCard, setMovingCard] = useState(null); 
-
+            const [movingCard, setMovingCard] = useState(null);
+            
             const [popupMsg, setPopupMsg] = useState(null);
             const popupTimer = useRef(null);
 
@@ -954,7 +1026,6 @@ const STARTER_DECKS = {
                 });
                 generatedDeck.sort(() => Math.random() - 0.5);
 
-                // Dynamically scan for whichever Vital card key is active in customDeck dictionary configuration
                 const chosenVitalId = Object.keys(customDeck).find(id => MASTER_CARDS.find(c => c.id === id)?.type === 'Vital');
                 const vitalDef = MASTER_CARDS.find(c => c.id === chosenVitalId);
                 if (vitalDef) {
@@ -1054,7 +1125,7 @@ const STARTER_DECKS = {
                         } else {
                             alert("🎉 You Win! Your opponent has conceded the match.");
                         }
-                        onLeaveLobby(); 
+                        onLeaveLobby();
                     }
                 });
             };
@@ -1165,7 +1236,7 @@ const STARTER_DECKS = {
                 }
 
                 setViewModal(prev => ({...prev, cards: newSourcePile}));
-
+                
                 if (dest === 'hand') {
                     setHand([...hand, card]);
                     addLog(`${username} recovered ${card.name} to their hand.`, true);
@@ -1188,6 +1259,7 @@ const STARTER_DECKS = {
                     if(c?.instanceId === instanceId) { updatedCard = updater(c); return updatedCard; }
                     return c;
                 }));
+
                 if (updatedCard) {
                     broadcastGrid(newGrid);
                     if(inspectedCard?.instanceId === instanceId) setInspectedCard(updatedCard);
@@ -1235,6 +1307,7 @@ const STARTER_DECKS = {
             const placeToGrid = (r, c) => {
                 if (myGrid[r][c] !== null) { addLog(`Cannot place a card on an occupied space!`, false); return; }
                 if (selectedHandIdx === null) return;
+                
                 const card = hand[selectedHandIdx];
                 if (card.type.includes('Act') || card.type === 'Zone') return alert("Acts and Zones have specific slots in the middle!");
                 
@@ -1255,14 +1328,16 @@ const STARTER_DECKS = {
             const placeToZone = () => {
                 if (sharedZone !== null) { addLog(`Zone slot is already occupied!`, false); return; }
                 if (selectedHandIdx === null) return;
+                
                 const card = hand[selectedHandIdx];
                 if (card.type !== 'Zone') return;
+                
                 let newHand = [...hand];
                 newHand.splice(selectedHandIdx, 1);
                 setHand(newHand);
                 setSelectedHandIdx(null);
                 setLockedInspectorId(null);
-
+                
                 const zonedCard = { ...card, ownerHost: isHost };
                 broadcastZone(zonedCard);
                 addLog(`${username} established a new Zone: ${card.name}.`, true);
@@ -1271,8 +1346,10 @@ const STARTER_DECKS = {
             const placeToAct = () => {
                 if (actSlot !== null) { addLog(`Act slot is already occupied!`, false); return; }
                 if (selectedHandIdx === null) return;
+                
                 const card = hand[selectedHandIdx];
                 if (!card.type.includes('Act')) return;
+                
                 let newHand = [...hand];
                 newHand.splice(selectedHandIdx, 1);
                 setHand(newHand);
@@ -1288,7 +1365,6 @@ const STARTER_DECKS = {
                     targetCard = card;
                     return { ...card, currentHp: card.currentHp + amt };
                 });
-
                 if (targetCard && targetCard.type === 'Vital' && targetCard.currentHp + amt <= 0) {
                     setTimeout(() => {
                         alert("Your Vital has fallen to 0. YOU LOST!");
@@ -1337,9 +1413,8 @@ const STARTER_DECKS = {
                 }
                 
                 card = { ...card, markers: {}, actionUsed: false };
-
+                
                 const isOpponentOwned = type === 'zone' && card.ownerHost !== isHost;
-
                 if (isOpponentOwned) {
                     if (conn && !isSoloTest) conn.send({ type: 'OPP_ZONE_AWAY', dest, card });
                     addLog(`${username} sent ${card.name} to the opponent's ${dest}.`, true);
@@ -1395,7 +1470,6 @@ const STARTER_DECKS = {
             const renderCardLayout = (card, showMenuParams) => {
                 return (
                     <div className="w-full h-full border-2 border-stone-800 rounded-lg bg-stone-850 shadow-md flex flex-col group relative">
-                        
                         <div className="absolute inset-0 rounded-lg overflow-hidden">
                             {card.image && (
                                 <img src={card.image} alt={card.name} className={`absolute inset-0 w-full h-full object-cover transition ${card.actionUsed ? 'opacity-40 grayscale blur-[1px]' : 'opacity-80 group-hover:opacity-100'}`} />
@@ -1405,7 +1479,6 @@ const STARTER_DECKS = {
                                     <span className="text-[9px] font-bold text-stone-200 text-center">{card.name}</span>
                                 </div>
                             )}
-
                             {card.actionUsed && (
                                 <div className="absolute inset-0 bg-black/50 z-10 flex items-center justify-center pointer-events-none">
                                     <span className="text-3xl opacity-80 drop-shadow-md">💤</span>
@@ -1451,7 +1524,6 @@ const STARTER_DECKS = {
 
             const renderCard = (card, onClick, showMenuParams) => {
                 const isMoveTarget = movingCard && showMenuParams?.type === 'grid';
-                
                 if (!card) return (
                     <div 
                         onClick={(e) => { 
@@ -1472,7 +1544,6 @@ const STARTER_DECKS = {
                         </span>
                     </div>
                 );
-
                 return (
                     <div 
                         onClick={(e) => { 
@@ -1536,7 +1607,7 @@ const STARTER_DECKS = {
                                                     key={`setup-${r}-${c}`} 
                                                     onClick={() => !myVitalLocked && connected && setMyVitalPos({r, c})}
                                                     className={`w-[80px] h-[112px] border-2 rounded-lg transition-all flex flex-col items-center justify-center relative overflow-hidden
-                                                        ${!connected ? 'border-stone-900 bg-stone-950 cursor-not-allowed' : 
+                                                          ${!connected ? 'border-stone-900 bg-stone-950 cursor-not-allowed' : 
                                                           isSelected ? 'border-amber-500 bg-amber-950/50 shadow-[0_0_15px_rgba(245,158,11,0.2)]' : 
                                                           'border-stone-800 border-dashed bg-stone-950 hover:border-stone-600 hover:scale-105 cursor-pointer'}`}
                                                 >
@@ -1993,7 +2064,7 @@ const STARTER_DECKS = {
         // APP ENTRY
         // ============================================================================
         const App = () => {
-            const [tab, setTab] = useState('lobby'); 
+            const [tab, setTab] = useState('lobby');
             const [roomConfig, setRoomConfig] = useState(null);
 
             const handleJoin = (code, user, isHost) => {
