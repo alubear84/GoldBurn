@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoldBurn</title>
-    <link rel="icon" type="image/x-icon" href="GoldBurnLogo.png">
+    <link rel="icon" type="image/x-icon" href="GoldBurnLogo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
@@ -564,6 +564,7 @@ const STARTER_DECKS = {
         'SDDP_tradinghall': 1
     }
 };
+
 
         const MARKER_COLORS = [
             { bg: '#ef4444', name: 'Red' }, { bg: '#22c55e', name: 'Green' }, { bg: '#3b82f6', name: 'Blue' }, { bg: '#a855f7', name: 'Purple' }, { bg: '#eab308', name: 'Yellow' }
@@ -1272,6 +1273,21 @@ const STARTER_DECKS = {
 
             const formatTime = (secs) => `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
 
+            // MULTIPLAYER HANDSHAKE FIX (Sends entire board state on connect/reconnect)
+            useEffect(() => {
+                if (conn && connected && !isSoloTest) {
+                    conn.send({ type: 'SYNC_GRID', grid: myGrid });
+                    conn.send({ type: 'SYNC_GOLD', gold: gold });
+                    conn.send({ type: 'SYNC_ACT', act: actSlot });
+                    conn.send({ type: 'SYNC_ZONE', zone: sharedZone });
+                    conn.send({ type: 'SYNC_COUNTS', hand: hand.length, deck: deck.length, grave: grave, voidZone: voidZone });
+                    if (setupPhase && myVitalLocked && myVitalPos && vitalCardInst) {
+                        conn.send({ type: 'VITAL_LOCKED', pos: myVitalPos, card: vitalCardInst });
+                    }
+                }
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, [conn, connected]);
+
             useEffect(() => {
                 if (conn && connected && !setupPhase && !isSoloTest) {
                     conn.send({ type: 'SYNC_COUNTS', hand: hand.length, deck: deck.length, grave: grave, voidZone: voidZone });
@@ -1289,7 +1305,6 @@ const STARTER_DECKS = {
                 c.on('open', () => {
                     setConnected(true);
                     addLog("Opponent Connected!");
-                    c.send({ type: 'SYNC_GOLD', gold: isHost ? 3 : 0 });
                 });
                 c.on('data', data => {
                     if (data.type === 'LOG') setLogs(prev => [data.msg, ...prev]);
@@ -1539,7 +1554,7 @@ const STARTER_DECKS = {
                         name: placingToken.name || 'Token',
                         type: 'Troop',
                         currentHp: parseInt(placingToken.hp) || 1,
-                        image: 'XXXXtoken.png',
+                        image: 'XXXXtoken.jpg',
                         instanceId: 'tok_' + Math.random().toString(36).substr(2, 9)
                     };
                     let newGrid = [...myGrid];
@@ -1917,7 +1932,7 @@ const STARTER_DECKS = {
             // Calculate SVG paths for active pings
             const renderPingOverlay = () => {
                 return (
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none z-[100]" style={{ overflow: 'visible' }}>
+                    <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100]" style={{ overflow: 'visible' }}>
                         {activePings.map(ping => {
                             const src = document.getElementById(ping.source);
                             const tgt = document.getElementById(ping.target);
@@ -2478,7 +2493,7 @@ const STARTER_DECKS = {
                 <GameProvider>
                     <div className="flex flex-col min-h-screen">
                         <header className="bg-stone-900 border-b border-stone-800 p-3 flex justify-between items-center px-6">
-                            <h1 className="text-sm font-black tracking-widest text-amber-500 uppercase">GoldBurn</h1>
+                            <h1 className="text-sm font-black tracking-widest text-amber-500 uppercase">GoldBurn <span className="text-stone-500 text-[9px] ml-1">V3</span></h1>
                             {(tab === 'lobby' || tab === 'forge') && (
                                 <nav className="flex gap-2">
                                     <button onClick={()=>setTab('lobby')} className={`text-xs px-4 py-1.5 rounded font-bold uppercase tracking-wider transition ${tab==='lobby'?'bg-stone-800 text-stone-200':'text-stone-500 hover:text-stone-300'}`}>Play</button>
